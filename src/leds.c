@@ -4,15 +4,17 @@
 #define LEDS_ALL_ON     0xFFFF
 #define LED_OFFSET      1
 #define LSB             1
+#define LED_MAX         16
+#define ERROR_CODE      -1
 
 static uint16_t * direccion;
 static LedError_t registrarError;
 
 uint16_t LedToMask(uint8_t led) {
-    if (led > 16)
+    if (led > LED_MAX)
     {
         registrarError();   
-        return -1;
+        return ERROR_CODE;
     }
     return (LSB << (led - LED_OFFSET));
 }
